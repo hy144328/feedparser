@@ -1,0 +1,9 @@
+<rss version="2.0">
+<channel>
+<item>
+<content>Example content</content>
+<summary>Example summary</summary>
+<description>Example description</description>
+</item>
+</channel>
+</rss>

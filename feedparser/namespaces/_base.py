@@ -259,6 +259,7 @@ class Namespace(object):
     def _end_item(self):
         self.pop('item')
         self.inentry = 0
+        self.hasSummary = False
     _end_entry = _end_item
 
     def _start_language(self, attrs_d):
@@ -387,11 +388,7 @@ class Namespace(object):
         self.title_depth = self.depth
 
     def _start_description(self, attrs_d):
-        context = self._get_context()
-        if 'summary' in context:
-            self._summaryKey = 'content'
-            self._start_content(attrs_d)
-        else:
+        if not self.hasSummary:
             self.push_content('description', attrs_d, 'text/html', self.infeed or self.inentry or self.insource)
 
     def _start_abstract(self, attrs_d):
@@ -428,13 +425,9 @@ class Namespace(object):
             context['generator_detail']['name'] = value
 
     def _start_summary(self, attrs_d):
-        context = self._get_context()
-        if 'summary' in context:
-            self._summaryKey = 'content'
-            self._start_content(attrs_d)
-        else:
-            self._summaryKey = 'summary'
-            self.push_content(self._summaryKey, attrs_d, 'text/plain', 1)
+        self._summaryKey = 'summary'
+        self.push_content(self._summaryKey, attrs_d, 'text/plain', 1)
+        self.hasSummary = True
 
     def _end_summary(self):
         if self._summaryKey == 'content':

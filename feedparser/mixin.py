@@ -183,6 +183,8 @@ class _FeedParserMixin(
         self.inpublisher = 0
         self.insource = 0
 
+        self.hasSummary = False
+
         self.sourcedata = FeedParserDict()
         self.contentparams = FeedParserDict()
         self._summaryKey = None

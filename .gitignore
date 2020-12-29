@@ -11,3 +11,5 @@ build/
 .doit.*
 *.html
 poetry.lock
+.python-version
+.venv/
